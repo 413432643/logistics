@@ -584,10 +584,11 @@ export default {
 				show: false
 			},
 			legend: {
-				right: '10',
+				right: 0,
+				top:0,
 				y: 'center',
 				data: category,
-				orient: 'vertical',
+				orient: 'horizontal',
 				textStyle: {
 					color: '#fff'
 				},
@@ -596,10 +597,11 @@ export default {
 			series: [{
 				name: '告警级别分布',
 				type: 'pie',
-				center: ['35%', title ? '55%' : '50%'],
+				top:30,
+				center: ['50%', title ? '55%' : '50%'],
 				// radius: ['85%', '15%'],
 				avoidLabelOverlap: true,
-				selectedOffset: 20,
+				selectedOffset: 10,
 				roseType: 'area',
 				itemStyle: {
 					borderRadius: 10,
@@ -612,14 +614,14 @@ export default {
 					show: true,
 					color: '#fff',
 					position: 'outside',
-					fontSize: '1.4rem',
+					fontSize: '1.2rem',
 					textBorderWidth: 0,
 					// textShadowBlur:0
 				},
 				labelLine: {
 					show: true,
 					length: 10,
-					length2: 20,
+					length2: 10,
 					lineStyle: {
 						width: 1
 					}
@@ -695,15 +697,13 @@ export default {
 						color: color + 'bb',
 					}
 					]),
-					barBorderRadius: 20
+					borderRadius: [10, 10, 0, 0]
 				},
 				label: {
 					show: true,
 					position: 'top',
-					textStyle: {
-						fontSize: "1.2rem",
-						color: '#fff'
-					}
+					fontSize: "1.2rem",
+					color: '#fff'
 				}
 			}]
 		};
@@ -766,12 +766,10 @@ export default {
 				data: values,
 				type: 'line',
 				itemStyle: {
-					normal: {
-						color: color, //改变折线点的颜色
-						lineStyle: {
-							width: 1,
-							color: color // 线条颜色
-						}
+					color: color, //改变折线点的颜色
+					lineStyle: {
+						width: 1,
+						color: color // 线条颜色
 					}
 				},
 				lineStyle: {
@@ -811,7 +809,7 @@ export default {
 		var indicator = [];
 		category.forEach((item, index) => {
 			indicator.push({
-				text: item,
+				name: item,
 				min: 0,
 				max: 100
 			});
@@ -822,14 +820,12 @@ export default {
 				trigger: 'item',
 			},
 			radar: {
-				nameGap: 6, // 图中工艺等字距离图的距离
+				axisNameGap: 6, // 图中工艺等字距离图的距离
 				radius: '85%',
 				center: ['50%', '55%'],
-				name: {
-					textStyle: {
-						color: '#fff',
-						fontSize: 14,
-					},
+				axisName: {
+					color: '#fff',
+					fontSize: 14,
 				},
 				indicator: indicator,
 				axisLine: {
@@ -863,9 +859,7 @@ export default {
 				symbol: 'circle',
 				symbolSize: 5,
 				areaStyle: {
-					normal: {
-						color: 'rgba(245, 166, 35, 0.2)',
-					},
+					color: 'rgba(245, 166, 35, 0.2)',
 				},
 				itemStyle: {
 					color: 'rgba(245, 166, 35, 1)',
@@ -873,11 +867,9 @@ export default {
 					borderWidth: 10,
 				},
 				lineStyle: {
-					normal: {
-						type: 'dashed',
-						color: 'rgba(245, 166, 35, 1)',
-						width: 1,
-					},
+					type: 'dashed',
+					color: 'rgba(245, 166, 35, 1)',
+					width: 1,
 				},
 			}],
 		};

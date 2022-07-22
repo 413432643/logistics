@@ -59,7 +59,7 @@
     <el-col :span="12">
       <!-- 实时物流 -->
       <chartpanel title="实时物流" :style="centerHeightStyle">
-        <div id="mapchart" :style="centerHeightStyle"></div>
+        <div id="mapChart" :style="centerHeightStyle"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -86,7 +86,7 @@
     <el-col :span="6">
       <!-- 订单统计 -->
       <chartpanel title="订单统计" :style="heightStyle">
-         <v-chart
+        <v-chart
           ref="orderChart"
           style="min-height: 25vh"
           :option="orderChartOption"
@@ -95,15 +95,29 @@
     </el-col>
     <el-col :span="6">
       <!-- 投诉统计 -->
-      <chartpanel title="投诉统计" :style="heightStyle"></chartpanel>
+      <chartpanel title="投诉统计" :style="heightStyle">
+        <div id="warnChart" style="height: 25vh"></div>
+      </chartpanel>
     </el-col>
     <el-col :span="6">
       <!-- 用时统计 -->
-      <chartpanel title="用时统计" :style="heightStyle"></chartpanel>
+      <chartpanel title="用时统计" :style="heightStyle">
+        <v-chart
+          ref="timeChart"
+          style="min-height: 25vh"
+          :option="timeChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="6">
       <!-- 网点统计 -->
-      <chartpanel title="网点统计" :style="heightStyle"></chartpanel>
+      <chartpanel title="网点统计" :style="heightStyle">
+        <v-chart
+          ref="siteChart"
+          style="min-height: 25vh"
+          :option="siteChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
   </el-row>
 </template>
@@ -126,7 +140,6 @@ import api from "../assets/js/api.js";
 import config from "../assets/js/config.js";
 import utils from "../assets/js/utils.js";
 import chartutils from "../assets/js/chartutils.js";
-
 
 import * as echarts from "echarts";
 import "echarts-extension-amap";
@@ -265,22 +278,34 @@ const initStatusChart = () => {
 // 初始化人员信息
 let usertypeChart = ref();
 let usertypeChartOption = reactive({});
-let usertypeChartCategory = reactive(["配送", "人事", "管理", "运送","库管","仓库","客服"]);
+let usertypeChartCategory = reactive([
+  "配送",
+  "人事",
+  "管理",
+  "运送",
+  "库管",
+  "仓库",
+  "客服",
+]);
 let usertypeChartValues = reactive([]);
 const initUsertypeChart = () => {
-  usertypeChartCategory.forEach((item,index)=>{
-    usertypeChartValues.push(utils.random(100))
-    chartutils.initBarChart(usertypeChartOption,usertypeChartCategory,usertypeChartValues,"#FF5722")
-  })
+  usertypeChartCategory.forEach((item, index) => {
+    usertypeChartValues.push(utils.random(100));
+    chartutils.initBarChart(
+      usertypeChartOption,
+      usertypeChartCategory,
+      usertypeChartValues,
+      "#FF5722"
+    );
+  });
 };
-
 
 // 初始化订单统计
 let orderChart = ref();
 let orderChartOption = reactive({});
 let orderChartTime = reactive([]);
 let orderChartValues = reactive([]);
-const initOrderChart =()=>{
+const initOrderChart = () => {
   let date = new Date();
   date.setDate(date.getDate() - 7);
   for (
@@ -291,17 +316,131 @@ const initOrderChart =()=>{
     orderChartTime.push(i.format("MM-dd"));
     orderChartValues.push(utils.random(1000));
   }
-  chartutils.initLineChart(orderChartOption,orderChartTime,orderChartValues,'#4ed33c')
-}
+  chartutils.initLineChart(
+    orderChartOption,
+    orderChartTime,
+    orderChartValues,
+    "#4ed33c"
+  );
+};
+
+// 初始化投诉统计
+let warnChart = null;
+let warnChartCategory = reactive([
+  "丢件",
+  "态度不好",
+  "损坏",
+  "时间慢",
+  "少件",
+  "客服问题",
+  "保险问题",
+  "破损",
+]);
+const initWarnChart = () => {
+  let datas = [];
+  for (let i = 0; i < 50; i++) {
+    let color =
+      "rgb(" +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      ")";
+    datas.push({
+      name: warnChartCategory[i % warnChartCategory.length],
+      value: (Math.random(100) * 1000).toFixed(0),
+      textStyle: {
+        color: color,
+      },
+    });
+  }
+
+  let option = {
+    tooltip: {
+      show: true,
+      position: "top",
+      textStyle: {
+        fontSize: 14,
+      },
+    },
+    series: [
+      {
+        type: "wordCloud",
+        // 网格大小，各项之间间距
+        gridSize: 20,
+        // 形状 circle 圆，cardioid  心， diamond 菱形，
+        // triangle-forward 、triangle 三角，star五角星
+        shape: "circle",
+        // 字体大小范围
+        sizeRange: [12, 30],
+        // 文字旋转角度范围
+        rotationRange: [0, 90],
+        // 旋转步值
+        rotationStep: 90,
+        // 自定义图形
+        // maskImage: maskImage,
+        left: "center",
+        top: "0",
+        // 画布宽
+        width: "95%",
+        // 画布高
+        height: "95%",
+        // 是否渲染超出画布的文字
+        drawOutOfBound: false,
+        data: datas,
+      },
+    ],
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  warnChart = $echarts.init(document.getElementById("warnChart"));
+  warnChart.setOption(option);
+};
+
+// 初始化用时统计
+let timeChart = ref();
+let timeChartOption = reactive({});
+let timeChartCategory = reactive(['1天','2天','3天','4天','5天','6天','7天']);
+let timeChartValues = reactive([]); 
+const initTimeChart = () => {
+  timeChartCategory.forEach((item, index) => {
+    timeChartValues.push(utils.random(100));
+    chartutils.initRadarChart(
+      timeChartOption,
+      timeChartCategory,
+      timeChartValues,
+      "#FF8a26"
+    );
+  });
+};
+
+// 初始化网点统计
+let siteChart = ref();
+let siteChartOption = reactive({});
+let siteChartCategory = reactive(['区域物流中心','市区物流中心','乡镇物流中心','小区配送网点']);
+let siteChartValues = reactive([]);
+const initSiteChart = () => {
+  siteChartCategory.forEach((item, index) => {
+    siteChartValues.push(utils.random(100));
+    chartutils.initPieFullChart(
+      siteChartOption,
+      siteChartCategory,
+      siteChartValues
+    );
+  });
+};
 
 // 初始化全部图表
 let mapChart = null;
 const initCharts = () => {
   initTodayData();
   initStatusChart();
-  initUsertypeChart()
-  initOrderChart()
-  mapChart = chartutils.initMapChart("实时物流信息", "mapchart");
+  initUsertypeChart();
+  initOrderChart();
+  initWarnChart();
+  initTimeChart();
+  initSiteChart();
+  mapChart = chartutils.initMapChart("实时物流信息", "mapChart");
 };
 
 // 更新状态占比
@@ -314,18 +453,48 @@ const updateStatusChart = () => {
   });
 };
 // 更新人员信息
-const updateUsertypeChart=()=>{
-  usertypeChartValues.forEach((item,index)=>{
-      usertypeChartValues[index] = utils.random(100)
-    })
-}
-
+const updateUsertypeChart = () => {
+  usertypeChartValues.forEach((item, index) => {
+    usertypeChartValues[index] = utils.random(100);
+  });
+};
 // 更新订单统计
-const updateOrderChart=()=>{
-    orderChartValues.forEach((item,index)=>{
-      orderChartValues[index] = utils.random(1000)
-    })
-}
+const updateOrderChart = () => {
+  orderChartValues.forEach((item, index) => {
+    orderChartValues[index] = utils.random(1000);
+  });
+};
+// 更新投诉统计
+const updateWarnChart = () => {
+  let warnChartOption = warnChart.getOption();
+  warnChartOption.series[0].data.forEach((item, index) => {
+    let color =
+      "rgb(" +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      ")";
+    item.value = (Math.random(100) * 1000).toFixed(0);
+    item.textStyle.color = color;
+  });
+  warnChart.setOption(warnChartOption);
+};
+
+// 更新用时统计
+const updateTimeChart = () => {
+  timeChartValues.forEach((item, index) => {
+    timeChartValues[index] = utils.random(100);
+  });
+};
+
+// 更新网点统计
+const updateSiteChart = () => {
+  siteChartOption.series[0].data.forEach((item, index) => {
+    item.value = utils.random(100);
+  });
+};
 
 // 实时订单数据
 let orders = reactive([
@@ -382,8 +551,11 @@ const startRefreshChart = () => {
   timer = setInterval(function () {
     initTodayData();
     updateStatusChart();
-    updateUsertypeChart()
-    updateOrderChart()
+    updateUsertypeChart();
+    updateOrderChart();
+    updateWarnChart();
+    updateTimeChart();
+    updateSiteChart();
   }, refreshtime);
 };
 
@@ -395,6 +567,9 @@ onMounted(() => {
     statusChart && statusChart.value.resize();
     usertypeChart && usertypeChart.value.resize();
     orderChart && orderChart.value.resize();
+    warnChart && warnChart.value.resize();
+    timeChart && timeChart.value.resize();
+    siteChart && siteChart.value.resize();
   };
 });
 
