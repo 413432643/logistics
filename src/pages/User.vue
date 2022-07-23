@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount, computed } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 
 import VChart, { THEME_KEY } from "vue-echarts";
 import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
