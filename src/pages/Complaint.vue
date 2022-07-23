@@ -4,32 +4,86 @@
       <chartpanel title="投诉数量" style="height: 30vh"></chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="问题分布" style="height: 30vh"></chartpanel>
+      <chartpanel title="问题分布" style="height: 30vh">
+        <div id="warnChart" style="height: 25vh"></div>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="实时投诉" style="height: 30vh"></chartpanel>
+      <chartpanel title="实时投诉" style="height: 30vh">
+        <div class="order_header tr flex">
+          <div class="th flex_item">状态</div>
+          <div class="th date">时间</div>
+          <div class="th status">状态</div>
+        </div>
+        <vue3-seamless-scroll :list="orders" class="orderscroll">
+          <div class="item flex" v-for="(item, index) in orders" :key="index">
+            <div class="th flex_item">{{ item.from }}</div>
+            <div class="th flex_item">{{ item.to }}</div>
+            <div class="th date">{{ item.date }}</div>
+            <div class="th status" :class="orderStatusClass(item)">
+              {{ item.status }}
+            </div>
+          </div>
+        </vue3-seamless-scroll>
+      </chartpanel>
     </el-col>
   </el-row>
   <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
     <el-col :span="8">
-      <chartpanel title="状态分布" style="height: 30vh"></chartpanel>
+      <chartpanel title="状态分布" style="height: 30vh">
+        <v-chart
+          ref="statusChart"
+          style="min-height: 25vh"
+          :option="statusChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="投诉排行" style="height: 30vh"></chartpanel>
+      <chartpanel title="投诉排行" style="height: 30vh">
+        <v-chart
+          ref="sortChart"
+          style="min-height: 25vh"
+          :option="sortChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="处理时间分布" style="height: 30vh"></chartpanel>
+      <chartpanel title="处理时间分布" style="height: 30vh">
+        <v-chart
+          ref="timeChart"
+          style="min-height: 25vh"
+          :option="timeChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
   </el-row>
   <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
     <el-col :span="8">
-      <chartpanel title="评价统计" style="height: 30vh"></chartpanel>
+      <chartpanel title="评价统计" style="height: 30vh">
+        <v-chart
+          ref="evaluateChart"
+          style="min-height: 25vh"
+          :option="evaluateChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="数量走势" style="height: 30vh"></chartpanel>
+      <chartpanel title="数量走势" style="height: 30vh">
+        <v-chart
+          ref="quantityChart"
+          style="min-height: 25vh"
+          :option="quantityChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
-      <chartpanel title="来源分布" style="height: 30vh"></chartpanel>
+      <chartpanel title="来源分布" style="height: 30vh">
+        <v-chart
+          ref="originChart"
+          style="min-height: 25vh"
+          :option="originChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
   </el-row>
 </template>
@@ -54,42 +108,334 @@ import "echarts-gl";
 
 const $echarts = echarts;
 
-// 初始化数量统计
-let numberChart = ref();
-let numberChartOption = reactive({});
-let numberChartCategory = reactive([
-  "配送",
-  "人事",
-  "管理",
-  "运送",
-  "库管",
-  "仓库",
-  "客服",
+// 实时投诉样式
+const orderStatusClass = computed(() => (item) => {
+  return [
+    item.status == "已揽件" ? "text_color_10" : "",
+    item.status == "运送中" ? "text_color_11" : "",
+    item.status == "配送中" ? "text_color_12" : "",
+    item.status == "待签收" ? "text_color_13" : "",
+  ];
+});
+
+// 初始化处理时间
+let timeChart = ref();
+let timeChartOption = reactive({});
+let timeChartCategory = reactive([
+  "1天内",
+  "2天内",
+  "3天内",
+  "4天内",
+  "5天内",
+  "6天内",
+  "7天内",
+  "其他",
 ]);
-let numberChartValues = reactive([]);
-const initNumberChart = () => {
-  numberChartCategory.forEach((item, index) => {
-    numberChartValues.push(utils.random(100));
+let timeChartValues = reactive([]);
+const initTimeChart = () => {
+  timeChartCategory.forEach((item, index) => {
+    timeChartValues.push(utils.random(100));
     chartutils.initBarChart(
-      numberChartOption,
-      numberChartCategory,
-      numberChartValues,
-      "#FF5722"
+      timeChartOption,
+      timeChartCategory,
+      timeChartValues,
+      "#f56c6c"
     );
   });
 };
 
-// 更新数量统计
-
-const updateNumberChart = () => {
-  numberChartValues.forEach((item, index) => {
-    numberChartValues[index] = utils.random(100);
+// 初始化投诉排行
+let sortChart = ref();
+let sortChartOption = reactive({});
+let sortChartCategory = reactive([
+  "丢件",
+  "态度不好",
+  "损坏",
+  "时间慢",
+  "少件",
+  "客服问题",
+  "保险问题",
+  "破损",
+]);
+let sortChartValues = reactive([]);
+const initSortChart = () => {
+  sortChartCategory.forEach((item, index) => {
+    sortChartValues.push(utils.random(100));
+    sortChartValues.sort((a, b) => {
+      return b - a;
+    });
+    chartutils.initBarChart(
+      sortChartOption,
+      sortChartCategory,
+      sortChartValues,
+      "#c6e2ff"
+    );
   });
 };
 
-const initCharts = () => {
-  initNumberChart();
+// 初始化投诉来源
+let originChart = ref();
+let originChartOption = reactive({});
+let originChartCategory = reactive([
+  "电话投诉",
+  "淘宝投诉",
+  "拼多多投诉",
+  "京东投诉",
+  "其他投诉",
+]);
+let originChartValues = reactive([]);
+const initOriginChart = () => {
+  originChartCategory.forEach((item, index) => {
+    originChartValues.push(utils.random(100));
+    chartutils.initPictorialBar(
+      originChartOption,
+      originChartCategory,
+      originChartValues,
+      "#c6e2ff"
+    );
+  });
 };
+
+// 初始化状态
+let statusChart = ref();
+let statusChartOption = reactive({});
+let statusChartCategory = reactive([
+  "待处理",
+  "处理中",
+  "已处理",
+  "待评价",
+  "已评价",
+]);
+let statusChartValues = reactive([]);
+const initStatusChart = () => {
+  statusChartCategory.forEach((item, index) => {
+    statusChartValues.push(utils.random(100));
+    chartutils.initPieFullChart(
+      statusChartOption,
+      statusChartCategory,
+      statusChartValues
+    );
+  });
+};
+
+// 初始化评价
+let evaluateChart = ref();
+let evaluateChartOption = reactive({});
+let evaluateChartCategory = reactive(["1星", "2星", "3星", "4星", "5星"]);
+let evaluateChartValues = reactive([]);
+const initEvaluateChart = () => {
+  evaluateChartCategory.forEach((item, index) => {
+    evaluateChartValues.push(utils.random(100));
+    chartutils.initRadarChart(
+      evaluateChartOption,
+      evaluateChartCategory,
+      evaluateChartValues
+    );
+  });
+};
+
+// 初始化数量走势
+let quantityChart = ref();
+let quantityChartOption = reactive({});
+let quantityChartTime = reactive([]);
+let quantityChartValues = reactive([]);
+const initQuantityChart = () => {
+  let date = new Date();
+  date.setDate(date.getDate() - 7);
+  for (
+    let i = new Date(date.getTime());
+    i.getTime() < new Date().getTime();
+    i.setDate(i.getDate() + 1)
+  ) {
+    quantityChartTime.push(i.format("MM-dd"));
+    quantityChartValues.push(utils.random(1000));
+  }
+  chartutils.initLineChart(
+    quantityChartOption,
+    quantityChartTime,
+    quantityChartValues,
+    "#4ed33c"
+  );
+};
+
+// 初始化投诉统计
+let warnChart = null;
+let warnChartCategory = reactive([
+  "丢件",
+  "态度不好",
+  "损坏",
+  "时间慢",
+  "少件",
+  "客服问题",
+  "保险问题",
+  "破损",
+]);
+const initWarnChart = () => {
+  let datas = [];
+  for (let i = 0; i < 50; i++) {
+    let color =
+      "rgb(" +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      ")";
+    datas.push({
+      name: warnChartCategory[i % warnChartCategory.length],
+      value: (Math.random(100) * 1000).toFixed(0),
+      textStyle: {
+        color: color,
+      },
+    });
+  }
+
+  let option = {
+    tooltip: {
+      show: true,
+      position: "top",
+      textStyle: {
+        fontSize: 14,
+      },
+    },
+    series: [
+      {
+        type: "wordCloud",
+        // 网格大小，各项之间间距
+        gridSize: 20,
+        // 形状 circle 圆，cardioid  心， diamond 菱形，
+        // triangle-forward 、triangle 三角，star五角星
+        shape: "circle",
+        // 字体大小范围
+        sizeRange: [12, 30],
+        // 文字旋转角度范围
+        rotationRange: [0, 90],
+        // 旋转步值
+        rotationStep: 90,
+        // 自定义图形
+        // maskImage: maskImage,
+        left: "center",
+        top: "0",
+        // 画布宽
+        width: "95%",
+        // 画布高
+        height: "95%",
+        // 是否渲染超出画布的文字
+        drawOutOfBound: false,
+        data: datas,
+      },
+    ],
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  warnChart = $echarts.init(document.getElementById("warnChart"));
+  warnChart.setOption(option);
+};
+
+const initCharts = () => {
+  initTimeChart();
+  initStatusChart();
+  initEvaluateChart();
+  initSortChart();
+  initOriginChart();
+  initQuantityChart();
+  initWarnChart();
+};
+
+// 更新处理时间
+const updateTimeChart = () => {
+  timeChartValues.forEach((item, index) => {
+    timeChartValues[index] = utils.random(100);
+  });
+};
+// 更新投诉排序
+const updateSortChart = () => {
+  sortChartValues.forEach((item, index) => {
+    sortChartValues[index] = utils.random(100);
+  });
+  sortChartValues.sort((a, b) => {
+    return b - a;
+  });
+};
+
+// 更新来源
+const updateOriginChart = () => {
+  originChartValues.forEach((item, index) => {
+    originChartValues[index] = utils.random(100);
+  });
+};
+
+// 更新状态
+const updateStatusChart = () => {
+  statusChartOption.series[0].data.forEach((item, index) => {
+    item.value = utils.random(100);
+  });
+};
+
+// 更新评价
+const updateEvaluateChart = () => {
+  evaluateChartValues.forEach((item, index) => {
+    evaluateChartValues[index] = utils.random(100);
+  });
+};
+
+// 更新数量走势
+const updateQuantityChart = () => {
+  quantityChartValues.forEach((item, index) => {
+    quantityChartValues[index] = utils.random(100);
+  });
+};
+
+// 更新投诉统计
+const updateWarnChart = () => {
+  let warnChartOption = warnChart.getOption();
+  warnChartOption.series[0].data.forEach((item, index) => {
+    let color =
+      "rgb(" +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      "," +
+      Math.round(Math.random() * 255) +
+      ")";
+    item.value = (Math.random(100) * 1000).toFixed(0);
+    item.textStyle.color = color;
+  });
+  warnChart.setOption(warnChartOption);
+};
+
+// 实时订单数据
+let orders = reactive([
+  {
+    from: "广州",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "已揽件",
+  },
+  {
+    from: "西安",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "运送中",
+  },
+  {
+    from: "西安",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "配送中",
+  },
+  {
+    from: "河南",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "待签收",
+  },
+  {
+    from: "河北",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "已揽件",
+  },
+  {
+    from: "河北",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "已揽件",
+  },
+]);
 
 // 数据刷新
 let timer = null;
@@ -104,7 +450,13 @@ const startRefreshChart = () => {
   });
 
   timer = setInterval(function () {
-    updateNumberChart();
+    updateTimeChart();
+    updateStatusChart();
+    updateEvaluateChart();
+    updateSortChart();
+    updateOriginChart();
+    updateQuantityChart();
+    updateWarnChart();
   }, refreshtime);
 };
 
@@ -112,8 +464,12 @@ onMounted(() => {
   initCharts();
   startRefreshChart();
   window.onresize = () => {
-    mapChart && mapChart.resize();
-    numberChart && numberChart.value.resize();
+    timeChart && timeChart.value.resize();
+    statusChart && statusChart.value.resize();
+    evaluateChart && evaluateChart.value.resize();
+    originChart && evaluateChart.value.resize();
+    sortChart && sortChart.value.resize();
+    quantityChart && quantityChart.value.resize();
   };
 });
 
@@ -122,4 +478,36 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.order_header {
+  height: 3vh;
+  background: #0adbfa88;
+  border-radius: 0.3vh;
+  .date {
+    width: 8vw;
+  }
+  .status {
+    width: 3vw;
+  }
+}
+.orderscroll {
+  height: 22vh;
+  width: 100%;
+  overflow: hidden;
+  .item {
+    padding: 1vh 0.8vh;
+    font-size: 1.4rem;
+    border-radius: 0.5vh;
+    text-align: center;
+    .date {
+      width: 8vw;
+    }
+    .status {
+      width: 3vw;
+    }
+  }
+  .item:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+</style>

@@ -96,10 +96,9 @@ const updateNumberChart =()=>{
 
 
 
-let mapChart = null;
 const initCharts = () => {
  initNumberChart()
-  mapChart = chartutils.initMapChart("实时物流信息", "mapChart");
+
 };
 
 // 数据刷新
@@ -124,7 +123,6 @@ onMounted(()=>{
   initCharts()
   startRefreshChart();
   window.onresize = () => {
-    mapChart && mapChart.resize();
     numberChart && numberChart.value.resize();
 
   };

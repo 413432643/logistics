@@ -585,7 +585,7 @@ export default {
 			},
 			legend: {
 				right: 0,
-				top:0,
+				top: 0,
 				y: 'center',
 				data: category,
 				orient: 'horizontal',
@@ -597,7 +597,7 @@ export default {
 			series: [{
 				name: '告警级别分布',
 				type: 'pie',
-				top:30,
+				top: 30,
 				center: ['50%', title ? '55%' : '50%'],
 				// radius: ['85%', '15%'],
 				avoidLabelOverlap: true,
@@ -927,9 +927,9 @@ export default {
 			series: [{
 				type: 'pictorialBar',
 				itemStyle: {
-					normal: {
-						color: color,
-					},
+
+					color: color,
+
 				},
 				symbolRepeat: 'fixed',
 				symbolMargin: 4,
@@ -945,10 +945,8 @@ export default {
 				label: {
 					show: true,
 					position: 'top',
-					textStyle: {
-						fontSize: "1.2rem",
-						color: '#fff'
-					}
+					fontSize: "1.2rem",
+					color: '#fff'
 				}
 			}]
 		};

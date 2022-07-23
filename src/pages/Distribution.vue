@@ -85,7 +85,7 @@
     </el-col>
     <el-col :span="8">
       <chartpanel title="配送时间" style="height: 30vh">
-         <v-chart
+        <v-chart
           ref="timeChart"
           style="min-height: 25vh"
           :option="timeChartOption"
@@ -94,7 +94,7 @@
     </el-col>
     <el-col :span="8">
       <chartpanel title="区域分布" style="height: 30vh">
-          <div id="warnChart" style="height: 25vh"></div>
+        <div id="warnChart" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -149,11 +149,7 @@ const initTodayData = () => {
 // 初始化次数
 let numberChart = ref();
 let numberChartOption = reactive({});
-let numberChartCategory = reactive([
-  "第一次配送",
-  "第二次配送",
-  "第三次配送",
-]);
+let numberChartCategory = reactive(["第一次配送", "第二次配送", "第三次配送"]);
 let numberChartValues = reactive([]);
 const initNumberChart = () => {
   numberChartCategory.forEach((item, index) => {
@@ -190,7 +186,6 @@ const initStatusChart = () => {
   });
 };
 
-
 // 初始化数量
 let quantityChart = ref();
 let quantityChartOption = reactive({});
@@ -207,7 +202,11 @@ let quantityChartCategory = reactive([
 let quantityChartValues = reactive([]);
 const initQuantityChart = () => {
   quantityChartCategory.forEach((item, index) => {
+    
     quantityChartValues.push(utils.random(100));
+    quantityChartValues.sort((a, b) => {
+      return b - a;
+    });
     chartutils.initBarChart(
       quantityChartOption,
       quantityChartCategory,
@@ -217,7 +216,7 @@ const initQuantityChart = () => {
   });
 };
 
-// 初始化状态
+// 初始化类型
 let typeChart = ref();
 let typeChartOption = reactive({});
 let typeChartCategory = reactive([
@@ -284,16 +283,16 @@ const initTrendChart = () => {
   );
 };
 
-// 初始化订单走势
+// 初始化配送时间
 let timeChart = ref();
 let timeChartOption = reactive({});
 let timeChartTime = reactive([]);
 let timeChartValues = reactive([]);
 const initTimeChart = () => {
-for (let i = 0; i < 12; i++) {
-			timeChartTime.push((i+7)+':00');
-			timeChartValues.push(utils.random(100));
-		}
+  for (let i = 0; i < 12; i++) {
+    timeChartTime.push(i + 7 + ":00");
+    timeChartValues.push(utils.random(100));
+  }
   chartutils.initLineChart(
     timeChartOption,
     timeChartTime,
@@ -376,20 +375,17 @@ const initWarnChart = () => {
   warnChart.setOption(option);
 };
 
-
-
 const initCharts = () => {
   initTodayData();
-  initNumberChart()
-  initStatusChart()
-  initQuantityChart()
-  initTypeChart()
-  initPeopleChart()
-  initTrendChart()
-  initTimeChart()
-  initWarnChart()
+  initNumberChart();
+  initStatusChart();
+  initQuantityChart();
+  initTypeChart();
+  initPeopleChart();
+  initTrendChart();
+  initTimeChart();
+  initWarnChart();
 };
-
 
 // 更新次数
 const updateNumberChart = () => {
@@ -410,9 +406,12 @@ const updateQuantityChart = () => {
   quantityChartValues.forEach((item, index) => {
     quantityChartValues[index] = utils.random(100);
   });
+  quantityChartValues.sort((a, b) => {
+    return b - a;
+  });
 };
 
-// 更新状态
+// 更新类型
 const updateTypeChart = () => {
   typeChartOption.series[0].data.forEach((item, index) => {
     item.value = utils.random(100);
@@ -433,10 +432,10 @@ const updateTrendChart = () => {
   });
 };
 
-// 更新订单走势
+// 更新配送时间
 const updateTimeChart = () => {
   timeChartValues.forEach((item, index) => {
-     timeChartValues[index] = utils.random(1000);
+    timeChartValues[index] = utils.random(1000);
   });
 };
 
@@ -458,7 +457,6 @@ const updateWarnChart = () => {
   warnChart.setOption(warnChartOption);
 };
 
-
 // 数据刷新
 let timer = null;
 const startRefreshChart = () => {
@@ -473,14 +471,14 @@ const startRefreshChart = () => {
 
   timer = setInterval(function () {
     initTodayData();
-    updateNumberChart()
-    updateStatusChart()
-    updateQuantityChart()
-    updateTypeChart()
-    updatePeopleChart()
-    updateTrendChart()
-    updateTimeChart()
-    updateWarnChart()
+    updateNumberChart();
+    updateStatusChart();
+    updateQuantityChart();
+    updateTypeChart();
+    updatePeopleChart();
+    updateTrendChart();
+    updateTimeChart();
+    updateWarnChart();
   }, refreshtime);
 };
 
@@ -504,7 +502,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-  .today-item {
+.today-item {
   display: flex;
   align-items: center;
   height: 10vh;
@@ -513,7 +511,7 @@ onBeforeUnmount(() => {
   .number-item {
     background: #ffffff22;
     font-size: 4rem;
-    width: 8vh; 
+    width: 8vh;
     height: 8vh;
     line-height: 8vh;
     text-align: center;
