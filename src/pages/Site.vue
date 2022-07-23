@@ -1,15 +1,27 @@
 <template>
-    <div>6</div>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="6">
+      <!-- 基础信息 -->
+      <chartpanel title="基础信息" style="height: 30vh; ">
+      </chartpanel>
+      <!-- 级别分布 -->
+      <chartpanel title="级别分布" style="height: 30vh; margin-top: 1vh">
+      </chartpanel>
+      <!-- 数量走势 -->
+      <chartpanel title="数量走势" style="height: 30vh; margin-top: 1vh">
+      </chartpanel>
+    </el-col>
+    <el-col :span="18">
+      <!-- 订单位置分布 -->
+      <chartpanel title="订单位置分布" style="height: 92.4vh">
+        <div id="mapChart" style="height: 92.4vh"></div>
+      </chartpanel>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup>
-import {
-  ref,
-  reactive,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-} from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount, computed } from "vue";
 
 import VChart, { THEME_KEY } from "vue-echarts";
 import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
@@ -27,7 +39,6 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-
 
 // 初始化数量统计
 let numberChart = ref();
@@ -56,17 +67,15 @@ const initNumberChart = () => {
 
 // 更新数量统计
 
-const updateNumberChart =()=>{
+const updateNumberChart = () => {
   numberChartValues.forEach((item, index) => {
     numberChartValues[index] = utils.random(100);
   });
-}
-
-
+};
 
 let mapChart = null;
 const initCharts = () => {
- initNumberChart()
+  initNumberChart();
   mapChart = chartutils.initMapChart("实时物流信息", "mapChart");
 };
 
@@ -83,20 +92,18 @@ const startRefreshChart = () => {
   });
 
   timer = setInterval(function () {
-    updateNumberChart()
+    updateNumberChart();
   }, refreshtime);
 };
 
-
-onMounted(()=>{
-  initCharts()
+onMounted(() => {
+  initCharts();
   startRefreshChart();
   window.onresize = () => {
     mapChart && mapChart.resize();
     numberChart && numberChart.value.resize();
-
   };
-})
+});
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);

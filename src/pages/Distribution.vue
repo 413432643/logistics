@@ -1,15 +1,41 @@
 <template>
-    <div>3</div>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="数量统计" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="类型分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="状态分布" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="数量走势" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="次数分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="人员类型" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="数量排行" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="配送时间" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="区域分布" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup>
-import {
-  ref,
-  reactive,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-} from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount, computed } from "vue";
 
 import VChart, { THEME_KEY } from "vue-echarts";
 import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
@@ -27,7 +53,6 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-
 
 // 初始化数量统计
 let numberChart = ref();
@@ -56,17 +81,15 @@ const initNumberChart = () => {
 
 // 更新数量统计
 
-const updateNumberChart =()=>{
+const updateNumberChart = () => {
   numberChartValues.forEach((item, index) => {
     numberChartValues[index] = utils.random(100);
   });
-}
-
-
+};
 
 let mapChart = null;
 const initCharts = () => {
- initNumberChart()
+  initNumberChart();
   mapChart = chartutils.initMapChart("实时物流信息", "mapChart");
 };
 
@@ -83,20 +106,18 @@ const startRefreshChart = () => {
   });
 
   timer = setInterval(function () {
-    updateNumberChart()
+    updateNumberChart();
   }, refreshtime);
 };
 
-
-onMounted(()=>{
-  initCharts()
+onMounted(() => {
+  initCharts();
   startRefreshChart();
   window.onresize = () => {
     mapChart && mapChart.resize();
     numberChart && numberChart.value.resize();
-
   };
-})
+});
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);

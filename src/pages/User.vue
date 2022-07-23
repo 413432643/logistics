@@ -1,5 +1,37 @@
 <template>
-    <div>8</div>
+    <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="员工数量分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="职位分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="状态分布" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="数量走势" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="工资分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="离职原因分布" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
+  <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
+    <el-col :span="8">
+      <chartpanel title="学历分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="年龄分布" style="height: 30vh"></chartpanel>
+    </el-col>
+    <el-col :span="8">
+      <chartpanel title="性别分布" style="height: 30vh"></chartpanel>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup>
