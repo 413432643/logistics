@@ -1,7 +1,13 @@
 <template>
   <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
     <el-col :span="8">
-      <chartpanel title="投诉数量" style="height: 30vh"></chartpanel>
+      <chartpanel title="投诉率" style="height: 30vh">
+        <v-chart
+          ref="warnNumChart"
+          style="min-height: 25vh"
+          :option="warnNumChartOption"
+        ></v-chart>
+      </chartpanel>
     </el-col>
     <el-col :span="8">
       <chartpanel title="问题分布" style="height: 30vh">
@@ -11,7 +17,7 @@
     <el-col :span="8">
       <chartpanel title="实时投诉" style="height: 30vh">
         <div class="order_header tr flex">
-          <div class="th flex_item">状态</div>
+          <div class="th flex_item">问题</div>
           <div class="th date">时间</div>
           <div class="th status">状态</div>
         </div>
@@ -111,10 +117,11 @@ const $echarts = echarts;
 // 实时投诉样式
 const orderStatusClass = computed(() => (item) => {
   return [
-    item.status == "已揽件" ? "text_color_10" : "",
-    item.status == "运送中" ? "text_color_11" : "",
-    item.status == "配送中" ? "text_color_12" : "",
-    item.status == "待签收" ? "text_color_13" : "",
+    item.status == "待处理" ? "text_color_10" : "",
+    item.status == "已处理" ? "text_color_11" : "",
+    item.status == "处理中" ? "text_color_12" : "",
+    item.status == "待评价" ? "text_color_13" : "",
+    item.status == "已评价" ? "text_color_14" : "",
   ];
 });
 
@@ -191,7 +198,7 @@ const initOriginChart = () => {
       originChartOption,
       originChartCategory,
       originChartValues,
-      "#c6e2ff"
+      "#409eff"
     );
   });
 };
@@ -248,7 +255,7 @@ const initQuantityChart = () => {
     i.setDate(i.getDate() + 1)
   ) {
     quantityChartTime.push(i.format("MM-dd"));
-    quantityChartValues.push(utils.random(1000));
+    quantityChartValues.push(utils.random(100));
   }
   chartutils.initLineChart(
     quantityChartOption,
@@ -331,6 +338,71 @@ const initWarnChart = () => {
   warnChart.setOption(option);
 };
 
+// 初始化投诉数量
+let warnNumChart = ref();
+let warnNumChartOption = reactive({});
+let warnNumChartCategory = reactive(["投诉数量"]);
+let warnNumChartValues = reactive([]);
+const initWarnNumChart = () => {
+    warnNumChartCategory.forEach((item) => {
+    let value = utils.random(100);
+    warnNumChartValues.push([
+      {
+        name: item,
+        value: value,
+      },
+      {
+        value: 100 - value,
+      },
+    ]);
+  });
+
+  let series = [];
+  let titles = [];
+  warnNumChartValues.forEach((item, index) => {
+    let col = 100 / warnNumChartValues.length;
+    series.push({
+      type: "pie",
+      center: [ "50%", "45%"],
+      radius: ["70%", "55%"],
+      itemStyle: {
+        borderRadius: 15,
+        color: function (pama) {
+          if (pama.dataIndex == 0) {
+            return config.colors[index];
+          } else {
+            return "#0baefd33";
+          }
+        },
+      },
+      label: {
+        show: false,
+      },
+      data: item,
+    });
+    titles.push(
+      {
+        top: "37%",
+        subtext: item[0].value + "%",
+        left: "46%",
+        subtextStyle: {
+          color: "#fff",
+          fontSize: "1.4rem",
+        },
+      }
+    );
+  });
+
+  let option = {
+    color: config.colors,
+    title: titles,
+    series: series,
+  };
+  for (let key in option) {
+    warnNumChartOption[key] = option[key];
+  }
+};
+
 const initCharts = () => {
   initTimeChart();
   initStatusChart();
@@ -339,6 +411,7 @@ const initCharts = () => {
   initOriginChart();
   initQuantityChart();
   initWarnChart();
+  initWarnNumChart()
 };
 
 // 更新处理时间
@@ -403,38 +476,54 @@ const updateWarnChart = () => {
   warnChart.setOption(warnChartOption);
 };
 
+// 更新投诉数量
+const updateWarnNumChart = () => {
+    warnNumChartValues.forEach((item, index) => {
+    let value = utils.random(100);
+    item[0].value = value;
+    item[1].value = 100 - value;
+    warnNumChartOption.title[0].subtext = value + "%";
+  });
+};
+
 // 实时订单数据
 let orders = reactive([
   {
-    from: "广州",
+    from: "物品少件",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "已揽件",
+    status: "待处理",
   },
   {
-    from: "西安",
+    from: "快递破损",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "运送中",
+    status: "已处理",
   },
   {
-    from: "西安",
+    from: "配送时间慢",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "配送中",
+    status: "处理中",
   },
   {
-    from: "河南",
+    from: "破损",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "待签收",
+    status: "待评价",
+  },
+    {
+    from: "物品少件",
+    date: new Date().format("yyyy-MM-dd hh:mm:ss"),
+    status: "待处理",
   },
   {
-    from: "河北",
+    from: "保险问题",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "已揽件",
+    status: "已评价",
   },
   {
-    from: "河北",
+    from: "外包装损坏",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
-    status: "已揽件",
+    status: "处理中",
   },
+
 ]);
 
 // 数据刷新
@@ -457,6 +546,7 @@ const startRefreshChart = () => {
     updateOriginChart();
     updateQuantityChart();
     updateWarnChart();
+    updateWarnNumChart()
   }, refreshtime);
 };
 
@@ -467,9 +557,10 @@ onMounted(() => {
     timeChart && timeChart.value.resize();
     statusChart && statusChart.value.resize();
     evaluateChart && evaluateChart.value.resize();
-    originChart && evaluateChart.value.resize();
+    originChart && originChart.value.resize();
     sortChart && sortChart.value.resize();
     quantityChart && quantityChart.value.resize();
+    warnNumChart && warnNumChart.value.resize();
   };
 });
 
@@ -484,10 +575,10 @@ onBeforeUnmount(() => {
   background: #0adbfa88;
   border-radius: 0.3vh;
   .date {
-    width: 8vw;
+    width: 14vw;
   }
   .status {
-    width: 3vw;
+    width: 10vw;
   }
 }
 .orderscroll {
@@ -500,10 +591,10 @@ onBeforeUnmount(() => {
     border-radius: 0.5vh;
     text-align: center;
     .date {
-      width: 8vw;
+      width: 10vw;
     }
     .status {
-      width: 3vw;
+      width: 10vw;
     }
   }
   .item:nth-child(even) {

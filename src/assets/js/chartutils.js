@@ -878,6 +878,7 @@ export default {
 		}
 	},
 	initPictorialBar: function (option, category, values, color) {
+		
 		let option_ = {
 			backgroundColor: '#000000',
 			grid: this.createChartGaid('40vh', '10vh', "20vh", "20vh"),
@@ -924,12 +925,11 @@ export default {
 				},
 				name: '',
 			},
+			
 			series: [{
 				type: 'pictorialBar',
 				itemStyle: {
-
 					color: color,
-
 				},
 				symbolRepeat: 'fixed',
 				symbolMargin: 4,
@@ -945,8 +945,6 @@ export default {
 				label: {
 					show: true,
 					position: 'top',
-					fontSize: "1.2rem",
-					color: '#fff'
 				}
 			}]
 		};
