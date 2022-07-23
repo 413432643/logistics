@@ -129,7 +129,6 @@ import {
   onMounted,
   onBeforeUnmount,
   computed,
-  toRaw,
 } from "vue";
 
 import VChart, { THEME_KEY } from "vue-echarts";
