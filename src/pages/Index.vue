@@ -123,13 +123,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  reactive,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-} from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount, computed } from "vue";
 
 import VChart, { THEME_KEY } from "vue-echarts";
 import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
@@ -399,8 +393,16 @@ const initWarnChart = () => {
 // 初始化用时统计
 let timeChart = ref();
 let timeChartOption = reactive({});
-let timeChartCategory = reactive(['1天','2天','3天','4天','5天','6天','7天']);
-let timeChartValues = reactive([]); 
+let timeChartCategory = reactive([
+  "1天",
+  "2天",
+  "3天",
+  "4天",
+  "5天",
+  "6天",
+  "7天",
+]);
+let timeChartValues = reactive([]);
 const initTimeChart = () => {
   timeChartCategory.forEach((item, index) => {
     timeChartValues.push(utils.random(100));
@@ -416,7 +418,12 @@ const initTimeChart = () => {
 // 初始化网点统计
 let siteChart = ref();
 let siteChartOption = reactive({});
-let siteChartCategory = reactive(['区域物流中心','市区物流中心','乡镇物流中心','小区配送网点']);
+let siteChartCategory = reactive([
+  "区域物流中心",
+  "市区物流中心",
+  "乡镇物流中心",
+  "小区配送网点",
+]);
 let siteChartValues = reactive([]);
 const initSiteChart = () => {
   siteChartCategory.forEach((item, index) => {

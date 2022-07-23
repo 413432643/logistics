@@ -2,13 +2,18 @@
   <el-row :gutter="10" style="margin: 0; padding: 0; margin-top: 1vh">
     <el-col :span="18">
       <!-- 实时物流地图 -->
-      <chartpanel title="实时物流地图" style="height: 92.4vh;">
-        <div id="mapChart" style="height: 61vh; "></div>
+      <chartpanel title="实时物流地图" style="height: 92.4vh">
+        <div id="mapChart" style="height: 92.4vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
       <!-- 实时数量统计 -->
-      <chartpanel title="实时数量统计" style="height: 30vh; ">
+      <chartpanel title="实时数量统计" style="height: 30vh">
+        <v-chart
+          ref="numberChart"
+          style="min-height: 25vh"
+          :option="numberChartOption"
+        ></v-chart>
       </chartpanel>
       <!-- 实时订单信息 -->
       <chartpanel title="实时订单信息" style="height: 30vh; margin-top: 1vh">
@@ -39,6 +44,80 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+
+// 初始化数量统计
+let numberChart = ref();
+let numberChartOption = reactive({});
+let numberChartCategory = reactive([
+  "配送",
+  "人事",
+  "管理",
+  "运送",
+  "库管",
+  "仓库",
+  "客服",
+]);
+let numberChartValues = reactive([]);
+const initNumberChart = () => {
+  numberChartCategory.forEach((item, index) => {
+    numberChartValues.push(utils.random(100));
+    chartutils.initBarChart(
+      numberChartOption,
+      numberChartCategory,
+      numberChartValues,
+      "#FF5722"
+    );
+  });
+};
+
+// 更新数量统计
+
+const updateNumberChart =()=>{
+  numberChartValues.forEach((item, index) => {
+    numberChartValues[index] = utils.random(100);
+  });
+}
+
+
+
+let mapChart = null;
+const initCharts = () => {
+ initNumberChart()
+  mapChart = chartutils.initMapChart("实时物流信息", "mapChart");
+};
+
+// 数据刷新
+let timer = null;
+const startRefreshChart = () => {
+  timer && clearInterval(timer);
+  //获取刷新周期，TODO 配置变动时，此处需自动更新
+  let refreshtime = 60 * 1000;
+  config.getConfig().forEach(function (item, index) {
+    if (item.key == "refreshtime") {
+      refreshtime = item.value;
+    }
+  });
+
+  timer = setInterval(function () {
+    updateNumberChart()
+  }, refreshtime);
+};
+
+
+onMounted(()=>{
+  initCharts()
+  startRefreshChart();
+  window.onresize = () => {
+    mapChart && mapChart.resize();
+    numberChart && numberChart.value.resize();
+
+  };
+})
+
+onBeforeUnmount(() => {
+  timer && clearInterval(timer);
+});
+
 </script>
 
 <style lang="scss" scoped></style>
