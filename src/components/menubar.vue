@@ -56,7 +56,7 @@
                 <div>{{ screenText }}</div>
               </div>
             </div>
-            <div class="split_line_h"></div>
+            <!-- <div class="split_line_h"></div>
             <div class="flex_item">
               <div class="tool_item" @click="showSettingDialog">
                 <div>
@@ -77,7 +77,7 @@
                 </div>
                 <div>退出</div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
