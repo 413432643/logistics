@@ -449,7 +449,7 @@ const initMapChart = (title, ele) => {
           scale: 6,
           brushType: "stroke",
         },
-        hoverAnimation: true, //是否开启鼠标 hover 的提示动画效果。
+        // hoverAnimation: true, //是否开启鼠标 hover 的提示动画效果。
       },
     ],
   };

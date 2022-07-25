@@ -13,12 +13,9 @@ import * as echarts from 'echarts'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElIcons from '@element-plus/icons-vue'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+// import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 import App from './App.vue'
-
-
-
 
 const app = createApp(App)
 
@@ -29,9 +26,7 @@ for (const name in ElIcons) {
     app.component(name, ElIcons[name])
 }
 app.use(router);
-app.use(ElementPlus, {
-    locale: zhCn,
-});
+app.use(ElementPlus);
 
 app.mount('#app')
 
