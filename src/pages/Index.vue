@@ -1,7 +1,6 @@
 <template>
   <el-row :gutter="10" :style="rowStyle">
     <el-col :span="6">
-      <!-- 今日概况 -->
       <chartpanel title="今日概况" :style="heightStyle">
         <div class="today-item">
           <span>运单数:</span>
@@ -36,7 +35,6 @@
           </span>
         </div>
       </chartpanel>
-      <!-- 实时订单 -->
       <chartpanel title="实时订单" :style="[heightStyle, marginTopStyle]">
         <div class="order_header tr flex">
           <div class="th flex_item">下单位置</div>
@@ -57,13 +55,11 @@
       </chartpanel>
     </el-col>
     <el-col :span="12">
-      <!-- 实时物流 -->
       <chartpanel title="实时物流" :style="centerHeightStyle">
         <div id="mapChart" :style="centerHeightStyle"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
-      <!-- 状态占比 -->
       <chartpanel title="状态占比" :style="heightStyle">
         <v-chart
           ref="statusChart"
@@ -71,7 +67,6 @@
           :option="statusChartOption"
         ></v-chart>
       </chartpanel>
-      <!-- 人员信息 -->
       <chartpanel title="人员信息" :style="[heightStyle, marginTopStyle]">
         <v-chart
           ref="usertypeChart"
@@ -84,7 +79,6 @@
 
   <el-row :gutter="10" :style="rowStyle">
     <el-col :span="6">
-      <!-- 订单统计 -->
       <chartpanel title="订单统计" :style="heightStyle">
         <v-chart
           ref="orderChart"
@@ -94,13 +88,11 @@
       </chartpanel>
     </el-col>
     <el-col :span="6">
-      <!-- 投诉统计 -->
       <chartpanel title="投诉统计" :style="heightStyle">
         <div id="warnChart" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
-      <!-- 用时统计 -->
       <chartpanel title="用时统计" :style="heightStyle">
         <v-chart
           ref="timeChart"
@@ -110,7 +102,6 @@
       </chartpanel>
     </el-col>
     <el-col :span="6">
-      <!-- 网点统计 -->
       <chartpanel title="网点统计" :style="heightStyle">
         <v-chart
           ref="siteChart"

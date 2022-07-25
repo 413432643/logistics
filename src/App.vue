@@ -7,6 +7,7 @@
     <!-- <settingdialog v-if="settingshow" @saved="refreshConfig" @hideSetting="hideSetting"></settingdialog> -->
   </div>
 </template>
+
 <script setup>
 import "./assets/css/dark_theme.css";
 import "./assets/css/default.css";
