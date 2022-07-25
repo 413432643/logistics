@@ -309,7 +309,7 @@ const initOrderChart = () => {
 };
 
 // 初始化投诉统计
-let warnChart = ref();
+let warnChart = null;
 let warnChartCategory = reactive([
   "丢件",
   "态度不好",

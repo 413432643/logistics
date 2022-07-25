@@ -10,12 +10,12 @@
 <body>
   <div id="app"></div>
   <script type="text/javascript">
-    const url = '//webapi.amap.com/maps'
-    const v = '1.4.15'
-    const key = '6e79f6d236e295632f21b385e363b6e8'
-    const plugin = 'AMap.Scale,AMap.ToolBar,AMap.ControlBar,AMap.DistrictLayer,AMap.MapType,AMap.TileLayer'
+    let url = '//webapi.amap.com/maps'
+    let v = '1.4.15'
+    let key = '6e79f6d236e295632f21b385e363b6e8'
+    let plugin = 'AMap.Scale,AMap.ToolBar,AMap.ControlBar,AMap.DistrictLayer,AMap.MapType,AMap.TileLayer'
 
-    const script = document.createElement("script");
+    let script = document.createElement("script");
     script.src = url + "?v=" + v + "&key=" + key + "&plugin=" + plugin;
 
     document.body.appendChild(script);
