@@ -344,7 +344,7 @@ let warnNumChartOption = reactive({});
 let warnNumChartCategory = reactive(["投诉数量"]);
 let warnNumChartValues = reactive([]);
 const initWarnNumChart = () => {
-    warnNumChartCategory.forEach((item) => {
+  warnNumChartCategory.forEach((item) => {
     let value = utils.random(100);
     warnNumChartValues.push([
       {
@@ -363,7 +363,7 @@ const initWarnNumChart = () => {
     let col = 100 / warnNumChartValues.length;
     series.push({
       type: "pie",
-      center: [ "50%", "45%"],
+      center: ["50%", "45%"],
       radius: ["70%", "55%"],
       itemStyle: {
         borderRadius: 15,
@@ -380,17 +380,15 @@ const initWarnNumChart = () => {
       },
       data: item,
     });
-    titles.push(
-      {
-        top: "37%",
-        subtext: item[0].value + "%",
-        left: "46%",
-        subtextStyle: {
-          color: "#fff",
-          fontSize: "1.4rem",
-        },
-      }
-    );
+    titles.push({
+      top: "37%",
+      subtext: item[0].value + "%",
+      left: "46%",
+      subtextStyle: {
+        color: "#fff",
+        fontSize: "1.4rem",
+      },
+    });
   });
 
   let option = {
@@ -411,7 +409,7 @@ const initCharts = () => {
   initOriginChart();
   initQuantityChart();
   initWarnChart();
-  initWarnNumChart()
+  initWarnNumChart();
 };
 
 // 更新处理时间
@@ -478,7 +476,7 @@ const updateWarnChart = () => {
 
 // 更新投诉数量
 const updateWarnNumChart = () => {
-    warnNumChartValues.forEach((item, index) => {
+  warnNumChartValues.forEach((item, index) => {
     let value = utils.random(100);
     item[0].value = value;
     item[1].value = 100 - value;
@@ -508,7 +506,7 @@ let orders = reactive([
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
     status: "待评价",
   },
-    {
+  {
     from: "物品少件",
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
     status: "待处理",
@@ -523,7 +521,6 @@ let orders = reactive([
     date: new Date().format("yyyy-MM-dd hh:mm:ss"),
     status: "处理中",
   },
-
 ]);
 
 // 数据刷新
@@ -546,7 +543,7 @@ const startRefreshChart = () => {
     updateOriginChart();
     updateQuantityChart();
     updateWarnChart();
-    updateWarnNumChart()
+    updateWarnNumChart();
   }, refreshtime);
 };
 
@@ -566,6 +563,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
+  warnChart = null;
 });
 </script>
 

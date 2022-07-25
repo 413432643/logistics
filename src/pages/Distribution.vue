@@ -202,7 +202,6 @@ let quantityChartCategory = reactive([
 let quantityChartValues = reactive([]);
 const initQuantityChart = () => {
   quantityChartCategory.forEach((item, index) => {
-    
     quantityChartValues.push(utils.random(100));
     quantityChartValues.sort((a, b) => {
       return b - a;
@@ -493,11 +492,13 @@ onMounted(() => {
     peopleChart && peopleChart.value.resize();
     trendChart && trendChart.value.resize();
     timeChart && timeChart.value.resize();
+    warnChart && warnChart.value.resize();
   };
 });
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
+  warnChart = null;
 });
 </script>
 
