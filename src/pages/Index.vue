@@ -320,8 +320,9 @@ let warnChartCategory = reactive([
   "保险问题",
   "破损",
 ]);
-let warnChartValue=reactive([])
+
 const initWarnChart = () => {
+  let datas = [];
   for (let i = 0; i < 50; i++) {
     let color =
       "rgb(" +
@@ -331,7 +332,7 @@ const initWarnChart = () => {
       "," +
       Math.round(Math.random() * 255) +
       ")";
-    warnChartValue.push({
+    datas.push({
       name: warnChartCategory[i % warnChartCategory.length],
       value: (Math.random(100) * 1000).toFixed(0),
       textStyle: {
@@ -372,7 +373,7 @@ const initWarnChart = () => {
         height: "95%",
         // 是否渲染超出画布的文字
         drawOutOfBound: false,
-        data: warnChartValue,
+        data: datas,
       },
     ],
   };
