@@ -492,13 +492,12 @@ onMounted(() => {
     peopleChart && peopleChart.value.resize();
     trendChart && trendChart.value.resize();
     timeChart && timeChart.value.resize();
-    warnChart && warnChart.value.resize();
+    warnChart && warnChart.resize();
   };
 });
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
-  warnChart = null;
 });
 </script>
 

@@ -564,7 +564,7 @@ onMounted(() => {
     statusChart && statusChart.value.resize();
     usertypeChart && usertypeChart.value.resize();
     orderChart && orderChart.value.resize();
-    warnChart && warnChart.value.resize();
+    warnChart && warnChart.resize();
     timeChart && timeChart.value.resize();
     siteChart && siteChart.value.resize();
   };
@@ -572,8 +572,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
-  mapChart = null;
-  warnChart = null;
 });
 </script>
 

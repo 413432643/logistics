@@ -532,7 +532,7 @@ onMounted(() => {
     statusChart && statusChart.value.resize();
     quantityChart && quantityChart.value.resize();
     payChart && payChart.value.resize();
-    warnChart && warnChart.value.resize();
+    warnChart && warnChart.resize();
     eduChart && eduChart.value.resize();
     ageChart && ageChart.value.resize();
     sexChart && sexChart.value.resize();
