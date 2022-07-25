@@ -379,6 +379,8 @@ const initWarnChart = () => {
   // 使用刚指定的配置项和数据显示图表。
   warnChart = $echarts.init(document.getElementById("warnChart"));
   warnChart.setOption(option);
+
+  console.log(warnChart)
 };
 
 // 初始化用时统计
