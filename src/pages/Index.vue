@@ -572,6 +572,9 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
+  // console.log(warnChart)
+  warnChart = null;
+  console.log(warnChart);
 });
 </script>
 
