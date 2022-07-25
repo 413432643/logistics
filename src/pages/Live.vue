@@ -293,10 +293,12 @@ onMounted(() => {
     mapChart && mapChart.resize();
     statusChart && statusChart.value.resize();
   };
+  
 });
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
+  
 });
 </script>
 
