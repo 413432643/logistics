@@ -3,7 +3,7 @@
     <el-col :span="18">
       <!-- 实时物流地图 -->
       <chartpanel title="仓库分布" style="height: 92.4vh">
-        <div id="mapChart3" style="height: 92.4vh"></div>
+        <div :id="mapId" style="height: 92.4vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -54,6 +54,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const mapId = ref("mapId" + Date.now() + Math.random())
 
 // 初始化库存
 let stockChart = ref();
@@ -474,7 +475,7 @@ const initCharts = () => {
   initStockChart();
   initWarehousingChart();
   initLeaveChart();
-  mapChart = initMapChart("仓库分布", "mapChart3");
+  mapChart = initMapChart("仓库分布", mapId.value);
 };
 
 // 更新库存

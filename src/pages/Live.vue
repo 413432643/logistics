@@ -3,7 +3,7 @@
     <el-col :span="18">
       <!-- 实时物流地图 -->
       <chartpanel title="实时物流地图" style="height: 92.4vh">
-        <div id="mapChart1" style="height: 92.4vh"></div>
+        <div :id="mapId" style="height: 92.4vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -92,6 +92,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const mapId = ref("mapId" + Date.now() + Math.random())
 
 // 实时订单样式
 const orderStatusClass = computed(() => (item) => {
@@ -206,7 +207,7 @@ const initStatusChart = () => {
 // 初始化地图
 let mapChart = null;
 const initMapChart =()=>{
-   mapChart = chartutils.initMapChart("实时物流信息", "mapChart1");
+   mapChart = chartutils.initMapChart("实时物流信息", mapId.value);
   let amapComponent = mapChart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
   let amap = amapComponent.getAMap();

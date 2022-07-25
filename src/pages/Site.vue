@@ -85,7 +85,7 @@
     <el-col :span="18">
       <!-- 订单位置分布 -->
       <chartpanel title="订单位置分布" style="height: 92.4vh">
-        <div id="mapChart4" style="height: 92.4vh"></div>
+        <div :id="mapId" style="height: 92.4vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -110,6 +110,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const mapId = ref("mapId" + Date.now() + Math.random())
 
 const baseinfodata = reactive({
   value1: utils.random(10000),
@@ -497,7 +498,7 @@ const initMapChart = function (title, ele) {
 const initCharts = () => {
   initLevelChart();
   initNumberChart();
-  mapChart = initMapChart("实时物流信息", "mapChart4");
+  mapChart = initMapChart("实时物流信息", mapId.value);
 };
 
 // 更新级别

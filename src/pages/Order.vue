@@ -29,7 +29,7 @@
     </el-col>
     <el-col :span="18">
       <chartpanel title="订单位置分布" style="height: 61.2vh">
-        <div id="mapChart2" style="height: 61.2vh"></div>
+        <div :id="mapId" style="height: 61.2vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -92,6 +92,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const mapId = ref("mapId" + Date.now() + Math.random())
 
 // 实时订单样式
 const orderStatusClass = computed(() => (item) => {
@@ -540,7 +541,7 @@ const initCharts = () => {
   initOriginChart();
   initTypeChart();
   initOrderChart();
-  mapChart = initMapChart("实时物流信息", "mapChart2");
+  mapChart = initMapChart("实时物流信息", mapId.value);
 };
 
 // 更新发布地
