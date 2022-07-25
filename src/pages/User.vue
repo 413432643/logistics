@@ -49,7 +49,7 @@
     </el-col>
     <el-col :span="8">
       <chartpanel title="离职原因分布" style="height: 30vh">
-        <div id="warnChart3" style="height: 25vh"></div>
+        <div :id="warn" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -103,6 +103,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const warn = ref("warn" + Date.now() + Math.random())
 
 // 初始化数量统计
 let numberChart = ref();
@@ -345,7 +346,7 @@ const initWarnChart = () => {
     ],
   };
   // 使用刚指定的配置项和数据显示图表。
-  warnChart = $echarts.init(document.getElementById("warnChart3"));
+  warnChart = $echarts.init(document.getElementById(warn.value));
   warnChart.setOption(option);
 };
 
