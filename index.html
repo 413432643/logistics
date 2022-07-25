@@ -14,14 +14,14 @@
     let v = '1.4.15'
     let key = '6e79f6d236e295632f21b385e363b6e8'
     let plugin = 'AMap.Scale,AMap.ToolBar,AMap.ControlBar,AMap.DistrictLayer,AMap.MapType,AMap.TileLayer'
-
+    
     let script = document.createElement("script");
     script.src = url + "?v=" + v + "&key=" + key + "&plugin=" + plugin;
 
-    document.body.appendChild(script);
+    document.head.appendChild(script);
 
   </script>
-  
+
   <script type="module" src="./src/main.js"></script>
 </body>
 
