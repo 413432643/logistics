@@ -320,7 +320,6 @@ let warnChartCategory = reactive([
   "保险问题",
   "破损",
 ]);
-let warnChartValues = reactive([]);
 const initWarnChart = () => {
   let datas = [];
   for (let i = 0; i < 50; i++) {

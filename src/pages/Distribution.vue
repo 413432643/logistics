@@ -314,7 +314,6 @@ let warnChartCategory = reactive([
   "杭州",
   "西藏",
 ]);
-let warnChartValues = reactive([]);
 const initWarnChart = () => {
   let datas = [];
   for (let i = 0; i < 50; i++) {
