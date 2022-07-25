@@ -89,7 +89,7 @@
     </el-col>
     <el-col :span="6">
       <chartpanel title="投诉统计" :style="heightStyle">
-        <div id="warnChart" style="height: 25vh"></div>
+        <div :id="warn" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -132,6 +132,8 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
+const warn = ref("warn" + Date.now() + Math.random())
+
 
 // 全局布局样式
 const rowStyle = {
@@ -320,7 +322,6 @@ let warnChartCategory = reactive([
   "保险问题",
   "破损",
 ]);
-
 const initWarnChart = () => {
   let datas = [];
   for (let i = 0; i < 50; i++) {
@@ -378,7 +379,7 @@ const initWarnChart = () => {
     ],
   };
   // 使用刚指定的配置项和数据显示图表。
-  warnChart = $echarts.init(document.getElementById("warnChart"));
+  warnChart = $echarts.init(document.getElementById(warn.value));
   warnChart.setOption(option);
 };
 
