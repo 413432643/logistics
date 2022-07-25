@@ -29,7 +29,7 @@
     </el-col>
     <el-col :span="18">
       <chartpanel title="订单位置分布" style="height: 61.2vh">
-        <div id="mapChart" style="height: 61.2vh"></div>
+        <div id="mapChart2" style="height: 61.2vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -540,7 +540,7 @@ const initCharts = () => {
   initOriginChart();
   initTypeChart();
   initOrderChart();
-  mapChart = initMapChart("实时物流信息", "mapChart");
+  mapChart = initMapChart("实时物流信息", "mapChart2");
 };
 
 // 更新发布地

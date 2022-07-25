@@ -94,7 +94,7 @@
     </el-col>
     <el-col :span="8">
       <chartpanel title="区域分布" style="height: 30vh">
-        <div id="warnChart" style="height: 25vh"></div>
+        <div id="warnChart1" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
   </el-row>
@@ -370,7 +370,7 @@ const initWarnChart = () => {
     ],
   };
   // 使用刚指定的配置项和数据显示图表。
-  warnChart = $echarts.init(document.getElementById("warnChart"));
+  warnChart = $echarts.init(document.getElementById("warnChart1"));
   warnChart.setOption(option);
 };
 

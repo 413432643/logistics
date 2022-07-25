@@ -3,7 +3,7 @@
     <el-col :span="18">
       <!-- 实时物流地图 -->
       <chartpanel title="仓库分布" style="height: 92.4vh">
-        <div id="mapChart" style="height: 92.4vh"></div>
+        <div id="mapChart3" style="height: 92.4vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -474,7 +474,7 @@ const initCharts = () => {
   initStockChart();
   initWarehousingChart();
   initLeaveChart();
-  mapChart = initMapChart("仓库分布", "mapChart");
+  mapChart = initMapChart("仓库分布", "mapChart3");
 };
 
 // 更新库存
