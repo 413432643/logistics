@@ -54,7 +54,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-const mapId = ref("mapId" + Date.now() + Math.random())
+const mapId = ref("mapId" + Date.now() + Math.random());
 
 // 初始化库存
 let stockChart = ref();
@@ -388,9 +388,7 @@ const initMapChart = (title, ele) => {
         // //标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10
         symbolSize: [20, 20],
         itemStyle: {
-       
-            color: "#FF5252", //标志颜色
-         
+          color: "#FF5252", //标志颜色
         },
         // 数据格式跟在 geo 坐标系上一样，每一项都是 [经度，纬度，数值大小，其它维度...]
         data: [[116.436561, 39.897346, 11]],
@@ -411,12 +409,10 @@ const initMapChart = (title, ele) => {
         // //标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10
         symbolSize: [10, 10],
         itemStyle: {
-    
-            // color: '#fac858', //标志颜色
-            color: function (pama) {
-              return config.colors[pama.dataIndex % config.colors.length];
-            },
-        
+          // color: '#fac858', //标志颜色
+          color: function (pama) {
+            return config.colors[pama.dataIndex % config.colors.length];
+          },
         },
         // 数据格式跟在 geo 坐标系上一样，每一项都是 [经度，纬度，数值大小，其它维度...]
         data: points,
@@ -437,12 +433,10 @@ const initMapChart = (title, ele) => {
         // //标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10
         symbolSize: [10, 10],
         itemStyle: {
-       
-            // color: '#00CAFF', //标志颜色
-            color: function (pama) {
-              return config.colors[pama.dataIndex % config.colors.length];
-            },
-       
+          // color: '#00CAFF', //标志颜色
+          color: function (pama) {
+            return config.colors[pama.dataIndex % config.colors.length];
+          },
         },
         // 数据格式跟在 geo 坐标系上一样，每一项都是 [经度，纬度，数值大小，其它维度...]
         data: points1,

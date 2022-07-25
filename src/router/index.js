@@ -11,42 +11,66 @@ const routes = [{
 {
     name: 'Index',
     path: '/Index',
-    component: () => import('../pages/Index.vue')
+    component: () => import('../pages/Index.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Site',
     path: '/Site',
-    component: () => import('../pages/Site.vue')
+    component: () => import('../pages/Site.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'User',
     path: '/User',
-    component: () => import('../pages/User.vue')
+    component: () => import('../pages/User.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Distribution',
     path: '/Distribution',
-    component: () => import('../pages/Distribution.vue')
+    component: () => import('../pages/Distribution.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Storage',
     path: '/Storage',
-    component: () => import('../pages/Storage.vue')
+    component: () => import('../pages/Storage.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Order',
     path: '/Order',
-    component: () => import('../pages/Order.vue')
+    component: () => import('../pages/Order.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Complaint',
     path: '/Complaint',
-    component: () => import('../pages/Complaint.vue')
+    component: () => import('../pages/Complaint.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Live',
     path: '/Live',
-    component: () => import('../pages/Live.vue')
+    component: () => import('../pages/Live.vue'),
+    meta: {
+        keepAlive: true
+    }
 }
 ]
 

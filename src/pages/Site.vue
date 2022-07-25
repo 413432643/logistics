@@ -110,7 +110,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-const mapId = ref("mapId" + Date.now() + Math.random())
+const mapId = ref("mapId" + Date.now() + Math.random());
 
 const baseinfodata = reactive({
   value1: utils.random(10000),

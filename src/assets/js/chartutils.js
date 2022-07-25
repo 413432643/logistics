@@ -683,7 +683,7 @@ export default {
 				name: '',
 			},
 			series: [{
-				name: "打分",
+				name: "数据",
 				data: values,
 				type: 'bar',
 				barWidth: '20vh',
@@ -762,7 +762,7 @@ export default {
 				name: '',
 			},
 			series: [{
-				name: "打分",
+				name: "数据",
 				data: values,
 				type: 'line',
 				itemStyle: {
@@ -855,7 +855,7 @@ export default {
 				data: [{
 					value: values,
 				}],
-				name: '1天',
+				name: '',
 				symbol: 'circle',
 				symbolSize: 5,
 				areaStyle: {

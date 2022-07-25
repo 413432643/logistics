@@ -2,7 +2,13 @@
   <div class="container" :class="curTheme">
     <menubar @showSettingDialog="settingshow = true"></menubar>
 
-    <router-view></router-view>
+    <router-view v-slot="{ Component }" v-if="$route.meta.keepAlive">
+      <keep-alive :max="1">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
 
     <!-- <settingdialog v-if="settingshow" @saved="refreshConfig" @hideSetting="hideSetting"></settingdialog> -->
   </div>

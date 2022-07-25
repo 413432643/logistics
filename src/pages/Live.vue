@@ -92,7 +92,7 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-const mapId = ref("mapId" + Date.now() + Math.random())
+const mapId = ref("mapId" + Date.now() + Math.random());
 
 // 实时订单样式
 const orderStatusClass = computed(() => (item) => {
@@ -206,17 +206,17 @@ const initStatusChart = () => {
 
 // 初始化地图
 let mapChart = null;
-const initMapChart =()=>{
-   mapChart = chartutils.initMapChart("实时物流信息", mapId.value);
+const initMapChart = () => {
+  mapChart = chartutils.initMapChart("实时物流信息", mapId.value);
   let amapComponent = mapChart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
   let amap = amapComponent.getAMap();
   amap.setZoom(5);
-}
+};
 const initCharts = () => {
   initTodayData();
   initStatusChart();
-  initMapChart()
+  initMapChart();
 };
 
 // 更新状态占比
@@ -294,12 +294,10 @@ onMounted(() => {
     mapChart && mapChart.resize();
     statusChart && statusChart.value.resize();
   };
-  
 });
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
-  
 });
 </script>
 
