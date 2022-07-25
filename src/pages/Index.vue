@@ -89,7 +89,7 @@
     </el-col>
     <el-col :span="6">
       <chartpanel title="投诉统计" :style="heightStyle">
-        <div :id="warn" style="height: 25vh"></div>
+        <div id="warnChart" style="height: 25vh"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
