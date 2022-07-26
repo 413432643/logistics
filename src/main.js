@@ -18,7 +18,7 @@ import App from './App.vue'
 const app = createApp(App)
 app.config.globalProperties.$echarts = echarts;
 
-setTimeout(() => { localStorage.clear() }, 0)
+setTimeout(() => { localStorage.clear() }, 10)
 
 // element的图标
 for (const name in ElIcons) {
