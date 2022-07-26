@@ -4,15 +4,6 @@ import {
     createWebHashHistory
 } from "vue-router";
 
-import Index from '../pages/Index.vue'
-import Site from '../pages/Site.vue'
-import User from '../pages/User.vue'
-import Distribution from '../pages/Distribution.vue'
-import Storage from '../pages/Storage.vue'
-import Order from '../pages/Order.vue'
-import Complaint from '../pages/Complaint.vue'
-import Live from '../pages/Live.vue'
-
 const routes = [{
     path: '/',
     redirect: "/Index"
@@ -20,42 +11,66 @@ const routes = [{
 {
     name: 'Index',
     path: '/Index',
-    component: Index,
+    component: () => import('../pages/Index.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Site',
     path: '/Site',
-    component: Site,
+    component: () => import('../pages/Site.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'User',
     path: '/User',
-    component: User,
+    component: () => import('../pages/User.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Distribution',
     path: '/Distribution',
-    component: Distribution,
+    component: () => import('../pages/Distribution.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Storage',
     path: '/Storage',
-    component: Storage,
+    component: () => import('../pages/Storage.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Order',
     path: '/Order',
-    component: Order,
+    component: () => import('../pages/Order.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Complaint',
     path: '/Complaint',
-    component: Complaint,
+    component: () => import('../pages/Complaint.vue'),
+    meta: {
+        keepAlive: true
+    }
 },
 {
     name: 'Live',
     path: '/Live',
-    component: Live,
+    component: () => import('../pages/Live.vue'),
+    meta: {
+        keepAlive: true
+    }
 }
 ]
 
