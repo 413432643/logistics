@@ -5,6 +5,7 @@ const $echarts = echarts;
 
 import utils from './utils.js'
 import config from './config.js'
+import AMapLoader from '@amap/amap-jsapi-loader';
 
 export default {
 	/**
@@ -115,7 +116,10 @@ export default {
 	getChartYTextColor: () => {
 		return '#ffffff88'
 	},
+
+	
 	initMapChart: function (title, ele) {
+		
 		let chinaGeoCoordMap = {
 			黑龙江: [127.9688, 45.368],
 			内蒙古: [110.3467, 41.4899],
@@ -483,16 +487,16 @@ export default {
 		let mapchart = $echarts.init(document.getElementById(ele));
 		mapchart.setOption(option);
 
-		// 获取 ECharts 高德地图组件
-		var amapComponent = mapchart.getModel().getComponent('amap');
-		// 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
-		var amap = amapComponent.getAMap();
-		// 添加控件
-		amap.addControl(new AMap.Scale());
-		amap.addControl(new AMap.ToolBar());
-		amap.addControl(new AMap.ControlBar());
-		// 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
-		amapComponent.setEChartsLayerInteractive(false);
+		// // 获取 ECharts 高德地图组件
+		// var amapComponent = mapchart.getModel().getComponent('amap');
+		// // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
+		// var amap = amapComponent.getAMap();
+		// // 添加控件
+		// amap.addControl(new AMap.Scale());
+		// amap.addControl(new AMap.ToolBar());
+		// amap.addControl(new AMap.ControlBar());
+		// // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
+		// amapComponent.setEChartsLayerInteractive(false);
 
 		return mapchart;
 	},
