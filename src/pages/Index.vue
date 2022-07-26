@@ -561,6 +561,7 @@ const startRefreshChart = () => {
 onMounted(() => {
   initCharts();
   startRefreshChart();
+  localStorage.clear();
   window.onresize = () => {
     mapChart && mapChart.resize();
     statusChart && statusChart.value.resize();
