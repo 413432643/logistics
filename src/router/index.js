@@ -4,6 +4,15 @@ import {
     createWebHashHistory
 } from "vue-router";
 
+import Index from '../pages/Index.vue'
+import Site from '../pages/Site.vue'
+import User from '../pages/User.vue'
+import Distribution from '../pages/Distribution.vue'
+import Storage from '../pages/Storage.vue'
+import Order from '../pages/Order.vue'
+import Complaint from '../pages/Complaint.vue'
+import Live from '../pages/Live.vue'
+
 const routes = [{
     path: '/',
     redirect: "/Index"
@@ -11,7 +20,7 @@ const routes = [{
 {
     name: 'Index',
     path: '/Index',
-    component: () => import('../pages/Index.vue'),
+    component: Index,
     meta: {
         keepAlive: true
     }
@@ -19,7 +28,7 @@ const routes = [{
 {
     name: 'Site',
     path: '/Site',
-    component: () => import('../pages/Site.vue'),
+    component: Site,
     meta: {
         keepAlive: true
     }
@@ -27,7 +36,7 @@ const routes = [{
 {
     name: 'User',
     path: '/User',
-    component: () => import('../pages/User.vue'),
+    component: User,
     meta: {
         keepAlive: true
     }
@@ -35,7 +44,7 @@ const routes = [{
 {
     name: 'Distribution',
     path: '/Distribution',
-    component: () => import('../pages/Distribution.vue'),
+    component: Distribution,
     meta: {
         keepAlive: true
     }
@@ -43,7 +52,7 @@ const routes = [{
 {
     name: 'Storage',
     path: '/Storage',
-    component: () => import('../pages/Storage.vue'),
+    component: Storage,
     meta: {
         keepAlive: true
     }
@@ -51,7 +60,7 @@ const routes = [{
 {
     name: 'Order',
     path: '/Order',
-    component: () => import('../pages/Order.vue'),
+    component: Order,
     meta: {
         keepAlive: true
     }
@@ -59,7 +68,7 @@ const routes = [{
 {
     name: 'Complaint',
     path: '/Complaint',
-    component: () => import('../pages/Complaint.vue'),
+    component: Complaint,
     meta: {
         keepAlive: true
     }
@@ -67,7 +76,7 @@ const routes = [{
 {
     name: 'Live',
     path: '/Live',
-    component: () => import('../pages/Live.vue'),
+    component:Live,
     meta: {
         keepAlive: true
     }
