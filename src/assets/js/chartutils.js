@@ -496,6 +496,7 @@ export default {
 		amap.addControl(new AMap.ControlBar());
 		// 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
 		amapComponent.setEChartsLayerInteractive(false);
+		
 		return mapchart;
 	},
 	initPieChart: function (option, category, values, title) {
