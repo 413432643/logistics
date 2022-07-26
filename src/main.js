@@ -18,13 +18,14 @@ import App from './App.vue'
 const app = createApp(App)
 app.config.globalProperties.$echarts = echarts;
 
+setTimeout(() => { localStorage.clear() }, 0)
+
 // element的图标
 for (const name in ElIcons) {
     app.component(name, ElIcons[name])
 }
 app.use(router);
 app.use(ElementPlus);
-app.use(AMapLoader)
 
 
 app.mount('#app')
