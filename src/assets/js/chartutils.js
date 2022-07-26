@@ -6,7 +6,6 @@ const $echarts = echarts;
 import utils from './utils.js'
 import config from './config.js'
 
-
 export default {
 	/**
 	 * 创建图表标题
@@ -878,7 +877,7 @@ export default {
 		}
 	},
 	initPictorialBar: function (option, category, values, color) {
-		
+
 		let option_ = {
 			backgroundColor: '#000000',
 			grid: this.createChartGaid('40vh', '10vh', "20vh", "20vh"),
@@ -925,7 +924,7 @@ export default {
 				},
 				name: '',
 			},
-			
+
 			series: [{
 				type: 'pictorialBar',
 				itemStyle: {

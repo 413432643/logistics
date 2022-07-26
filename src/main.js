@@ -12,6 +12,8 @@ import 'element-plus/dist/index.css'
 import * as ElIcons from '@element-plus/icons-vue'
 // import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
+
+
 import App from './App.vue'
 const app = createApp(App)
 app.config.globalProperties.$echarts = echarts;
