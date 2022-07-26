@@ -116,9 +116,9 @@ export default {
 		return '#ffffff88'
 	},
 
-	
+
 	initMapChart: function (title, ele) {
-		
+
 		let chinaGeoCoordMap = {
 			黑龙江: [127.9688, 45.368],
 			内蒙古: [110.3467, 41.4899],
@@ -496,7 +496,9 @@ export default {
 		amap.addControl(new AMap.ControlBar());
 		// 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
 		amapComponent.setEChartsLayerInteractive(false);
-		
+		setTimeout(() => {
+			localStorage.removeItem('_AMap_raster');
+		}, 0);
 		return mapchart;
 	},
 	initPieChart: function (option, category, values, title) {

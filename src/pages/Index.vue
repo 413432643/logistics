@@ -56,7 +56,7 @@
     </el-col>
     <el-col :span="12">
       <chartpanel title="实时物流" :style="centerHeightStyle">
-        <div v-if="isAmap" :id="mapId" :style="centerHeightStyle"></div>
+        <div :id="mapId" :style="centerHeightStyle"></div>
       </chartpanel>
     </el-col>
     <el-col :span="6">
@@ -132,13 +132,10 @@ import "echarts-liquidfill";
 import "echarts-gl";
 
 const $echarts = echarts;
-const warn = ref("warn" + Date.now() + Math.random())
-const mapId = ref("mapId" + Date.now() + Math.random())
+const warn = ref("warn" + Date.now() + Math.random());
+const mapId = ref("mapId" + Date.now() + Math.random());
 
-const isAmap =ref(true)
-setTimeout(()=>{
-  isAmap.value=true
-},100)
+
 
 // 全局布局样式
 const rowStyle = {
@@ -566,7 +563,7 @@ const startRefreshChart = () => {
 onMounted(() => {
   initCharts();
   startRefreshChart();
-  
+
   window.onresize = () => {
     mapChart && mapChart.resize();
     statusChart && statusChart.value.resize();
