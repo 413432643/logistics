@@ -21,65 +21,41 @@ const routes = [{
     name: 'Index',
     path: '/Index',
     component: Index,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Site',
     path: '/Site',
     component: Site,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'User',
     path: '/User',
     component: User,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Distribution',
     path: '/Distribution',
     component: Distribution,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Storage',
     path: '/Storage',
     component: Storage,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Order',
     path: '/Order',
     component: Order,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Complaint',
     path: '/Complaint',
     component: Complaint,
-    meta: {
-        keepAlive: true
-    }
 },
 {
     name: 'Live',
     path: '/Live',
-    component:Live,
-    meta: {
-        keepAlive: true
-    }
+    component: Live,
 }
 ]
 
