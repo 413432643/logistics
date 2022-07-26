@@ -452,16 +452,16 @@ const initMapChart = (title, ele) => {
   let mapchart = $echarts.init(document.getElementById(ele));
   mapchart.setOption(option);
 
-  // 获取 ECharts 高德地图组件
-  var amapComponent = mapchart.getModel().getComponent("amap");
-  // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
-  var amap = amapComponent.getAMap();
-  // 添加控件
-  amap.addControl(new AMap.Scale());
-  amap.addControl(new AMap.ToolBar());
-  amap.addControl(new AMap.ControlBar());
-  // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
-  amapComponent.setEChartsLayerInteractive(false);
+  // // 获取 ECharts 高德地图组件
+  // var amapComponent = mapchart.getModel().getComponent("amap");
+  // // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
+  // var amap = amapComponent.getAMap();
+  // // 添加控件
+  // amap.addControl(new AMap.Scale());
+  // amap.addControl(new AMap.ToolBar());
+  // amap.addControl(new AMap.ControlBar());
+  // // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
+  // amapComponent.setEChartsLayerInteractive(false);
 
   return mapchart;
 };
