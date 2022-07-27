@@ -504,6 +504,7 @@ const destroy = () => {
   chinaGeoCoordMap = {};
   chinaDatas = [];
   mapChart = initMapChart("站点信息", mapId.value);
+   mapChart.dispose()
 };
 
 // 更新级别
@@ -556,7 +557,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
    destroy()
-   mapChart.dispose()
+  
 });
 </script>
 

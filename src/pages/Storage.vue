@@ -477,6 +477,7 @@ const destroy = () => {
   chinaGeoCoordMap = {};
   chinaDatas = [];
   mapChart = initMapChart("仓库分布", mapId.value);
+  mapChart.dispose()
 };
 
 // 更新库存
@@ -532,7 +533,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
   destroy();
-  mapChart.dispose()
+  
 });
 </script>
 

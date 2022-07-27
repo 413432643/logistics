@@ -660,6 +660,7 @@ const destroy = () => {
     chinaGeoCoordMap,
     chinaDatas
   );
+  mapChart.dispose();
 };
 
 // 更新状态占比
@@ -796,7 +797,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
   destroy();
-  mapChart.dispose()
 });
 </script>
 
