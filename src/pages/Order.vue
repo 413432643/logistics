@@ -537,12 +537,13 @@ const initCharts = () => {
   initOriginChart();
   initTypeChart();
   initOrderChart();
-  mapChart = initMapChart("实时物流信息", mapId.value);
+  mapChart = initMapChart("订单信息", mapId.value);
 };
 const destroy =()=>{
   chinaGeoCoordMap={}
   chinaDatas=[]
-  mapChart = initMapChart("实时物流信息", mapId.value);
+  mapChart = initMapChart("订单信息", mapId.value);
+  mapChart = null;
 }
 
 
