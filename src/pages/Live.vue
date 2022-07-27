@@ -431,7 +431,6 @@ const destroy = () => {
     chinaGeoCoordMap,
     chinaDatas
   );
-  mapChart = null;
 };
 
 const initCharts = () => {
@@ -520,6 +519,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
   destroy();
+  mapChart.dispose()
 });
 </script>
 

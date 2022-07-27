@@ -438,7 +438,7 @@ const initMapChart = (title, ele) => {
       pitch: 0,
       // rotation: -45,
       // 3D模式，无论你使用的是1.x版本还是2.x版本，都建议开启此项以获得更好的渲染体验
-      viewMode: "3D",
+      // viewMode: "3D",
       // 高德地图支持的初始化地图配置
       // 高德地图初始中心经纬度
       center: [105.436561, 38.998546],
@@ -543,7 +543,6 @@ const destroy =()=>{
   chinaGeoCoordMap={}
   chinaDatas=[]
   mapChart = initMapChart("订单信息", mapId.value);
-  mapChart = null;
 }
 
 
@@ -659,6 +658,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
   destroy()
+  mapChart.dispose()
 });
 </script>
 

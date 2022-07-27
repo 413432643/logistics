@@ -1,6 +1,5 @@
 import * as echarts from 'echarts';
 import 'echarts-extension-amap';
-import AMapLoader from "@amap/amap-jsapi-loader";
 
 const $echarts = echarts;
 
@@ -128,29 +127,29 @@ export default {
 			let dataItem = chinaDatas[i];
 			let fromCoord = chinaGeoCoordMap[dataItem[0].name];
 			let toCoord = [116.436561, 39.897346];
-			if (fromCoord && toCoord) {
-				if (i % 2 == 0) {
-					lines.push([{
-						coord: toCoord,
-					},
-					{
-						coord: fromCoord,
-						value: dataItem[0].value,
-					},
-					]);
-					points.push([fromCoord[0], fromCoord[1], 11]);
-				} else {
-					lines1.push([{
-						coord: fromCoord,
-					},
-					{
-						coord: toCoord,
-						value: dataItem[0].value,
-					},
-					]);
-					points1.push([fromCoord[0], fromCoord[1], 11]);
-				}
+			if (!fromCoord || !toCoord) return
+			if (i % 2 == 0) {
+				lines.push([{
+					coord: toCoord,
+				},
+				{
+					coord: fromCoord,
+					value: dataItem[0].value,
+				},
+				]);
+				points.push([fromCoord[0], fromCoord[1], 11]);
+			} else {
+				lines1.push([{
+					coord: fromCoord,
+				},
+				{
+					coord: toCoord,
+					value: dataItem[0].value,
+				},
+				]);
+				points1.push([fromCoord[0], fromCoord[1], 11]);
 			}
+
 
 			for (let j = 0; j < chinaDatas.length; j++) {
 				if (i == j || j % 5 == 0 || j % 5 == 1 || j % 5 == 4) {
@@ -175,7 +174,7 @@ export default {
 				pitch: 0,
 				// rotation: -45,
 				// 3D模式，无论你使用的是1.x版本还是2.x版本，都建议开启此项以获得更好的渲染体验
-				viewMode: '3D',
+				// viewMode: '3D',
 				// 高德地图支持的初始化地图配置
 				// 高德地图初始中心经纬度
 				center: [105.436561, 33.998546],
@@ -341,13 +340,6 @@ export default {
 		let mapchart = $echarts.init(document.getElementById(ele));
 		mapchart.setOption(option);
 
-		if (!AMapLoader) {
-			AMapLoader.load({
-				"key": "6e79f6d236e295632f21b385e363b6e8",
-				"version": "1.4.15",
-				"plugins": ['AMap.Scale', 'AMap.ToolBar', 'AMap.ControlBar', 'AMap.DistrictLayer', 'AMap.MapType', 'AMap.TileLayer'],
-			})
-		}
 
 		// 获取 ECharts 高德地图组件
 		var amapComponent = mapchart.getModel().getComponent('amap');
