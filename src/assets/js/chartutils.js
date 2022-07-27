@@ -1,5 +1,6 @@
 import * as echarts from 'echarts';
 import 'echarts-extension-amap';
+import AMapLoader from "@amap/amap-jsapi-loader";
 
 const $echarts = echarts;
 
@@ -116,12 +117,13 @@ export default {
 		return '#ffffff88'
 	},
 
-	
-	initMapChart: function (title, ele , chinaGeoCoordMap,chinaDatas) {
+
+	initMapChart: function (title, ele, chinaGeoCoordMap, chinaDatas) {
 		let lines = [];
 		let points = [];
 		let points1 = [];
 		let lines1 = [];
+
 		for (let i = 0; i < chinaDatas.length; i++) {
 			let dataItem = chinaDatas[i];
 			let fromCoord = chinaGeoCoordMap[dataItem[0].name];
@@ -333,16 +335,24 @@ export default {
 				// hoverAnimation: true, //是否开启鼠标 hover 的提示动画效果。
 			}]
 		}
+
 		// 使用刚指定的配置项和数据显示图表。
-		
+
 		let mapchart = $echarts.init(document.getElementById(ele));
 		mapchart.setOption(option);
-		
+
+		if (!AMapLoader) {
+			AMapLoader.load({
+				"key": "6e79f6d236e295632f21b385e363b6e8",
+				"version": "1.4.15",
+				"plugins": ['AMap.Scale', 'AMap.ToolBar', 'AMap.ControlBar', 'AMap.DistrictLayer', 'AMap.MapType', 'AMap.TileLayer'],
+			})
+		}
+
 		// 获取 ECharts 高德地图组件
 		var amapComponent = mapchart.getModel().getComponent('amap');
 		// 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
 		var amap = amapComponent.getAMap();
-	
 		// 添加控件
 		amap.addControl(new AMap.Scale());
 		amap.addControl(new AMap.ToolBar());
@@ -350,7 +360,6 @@ export default {
 		// 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
 		amapComponent.setEChartsLayerInteractive(false);
 
-		
 		return mapchart;
 	},
 	initPieChart: function (option, category, values, title) {
