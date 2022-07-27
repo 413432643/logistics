@@ -129,7 +129,7 @@ import * as echarts from "echarts";
 import "echarts-extension-amap";
 import "echarts-wordcloud";
 import "echarts-liquidfill";
-import "echarts-gl";
+// import "echarts-gl";
 
 const $echarts = echarts;
 const warn = ref("warn" + Date.now() + Math.random());
@@ -563,7 +563,7 @@ const startRefreshChart = () => {
 onMounted(() => {
   initCharts();
   startRefreshChart();
-
+  
   window.onresize = () => {
     mapChart && mapChart.resize();
     statusChart && statusChart.value.resize();
@@ -577,6 +577,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
+    mapChart.clear();
+    console.log()
 });
 </script>
 

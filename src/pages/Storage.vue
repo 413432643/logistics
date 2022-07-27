@@ -32,7 +32,9 @@
         ></v-chart>
       </chartpanel>
     </el-col>
+    
   </el-row>
+  
 </template>
 
 <script setup>
@@ -123,7 +125,6 @@ const initLeaveChart = () => {
 };
 
 let mapChart = null;
-const initMapChart = (title, ele) => {
   let chinaGeoCoordMap = {
     黑龙江: [127.9688, 45.368],
     内蒙古: [110.3467, 41.4899],
@@ -327,11 +328,12 @@ const initMapChart = (title, ele) => {
       },
     ],
   ];
-
+const initMapChart = (title, ele) => {
   let lines = [];
   let points = [];
   let points1 = [];
   let lines1 = [];
+
   for (let i = 0; i < chinaDatas.length; i++) {
     let dataItem = chinaDatas[i];
     let fromCoord = chinaGeoCoordMap[dataItem[0].name];
@@ -341,6 +343,7 @@ const initMapChart = (title, ele) => {
       points1.push([fromCoord[0], fromCoord[1], 11]);
     }
   }
+  
 
   let option = {
     title: chartutils.createChartTitle(title),
@@ -448,9 +451,21 @@ const initMapChart = (title, ele) => {
       },
     ],
   };
+
   // 使用刚指定的配置项和数据显示图表。
   let mapchart = $echarts.init(document.getElementById(ele));
   mapchart.setOption(option);
+
+  // 获取 ECharts 高德地图组件
+  var amapComponent = mapchart.getModel().getComponent("amap");
+  // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
+  var amap = amapComponent.getAMap();
+  // 添加控件
+  amap.addControl(new AMap.Scale());
+  amap.addControl(new AMap.ToolBar());
+  amap.addControl(new AMap.ControlBar());
+  // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
+  amapComponent.setEChartsLayerInteractive(false);
 
   return mapchart;
 };
@@ -460,6 +475,12 @@ const initCharts = () => {
   initLeaveChart();
   mapChart = initMapChart("仓库分布", mapId.value);
 };
+
+const destroy =()=>{
+  chinaGeoCoordMap={}
+  chinaDatas=[]
+  mapChart = initMapChart("仓库分布", mapId.value);
+}
 
 // 更新库存
 const updateStockChart = () => {
@@ -513,7 +534,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   timer && clearInterval(timer);
-  
+  destroy()
 });
 </script>
 
