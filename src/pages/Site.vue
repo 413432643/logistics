@@ -480,7 +480,7 @@ const initMapChart = function (title, ele) {
   // 使用刚指定的配置项和数据显示图表。
   let mapchart = $echarts.init(document.getElementById(ele));
   mapchart.setOption(option);
-
+   console.log(mapchart)
   // 获取 ECharts 高德地图组件
   var amapComponent = mapchart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
@@ -491,7 +491,7 @@ const initMapChart = function (title, ele) {
   amap.addControl(new AMap.ControlBar());
   // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
   amapComponent.setEChartsLayerInteractive(false);
-  console.log(amap)
+ 
   return mapchart;
 };
 
