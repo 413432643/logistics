@@ -491,9 +491,10 @@ const initMapChart = function (title, ele) {
   amap.addControl(new AMap.ControlBar());
   // 禁用 ECharts 图层交互，从而使高德地图图层可以点击交互
   amapComponent.setEChartsLayerInteractive(false);
-
+  console.log(amap)
   return mapchart;
 };
+
 const initCharts = () => {
   initLevelChart();
   initNumberChart();
