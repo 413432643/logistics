@@ -481,8 +481,6 @@ const initMapChart = function (title, ele) {
   let mapchart = $echarts.init(document.getElementById(ele));
   
   mapchart.setOption(option);
-   console.log(mapchart.getModel())
-   console.log(mapchart.getModel().getComponent("amap"))
   // 获取 ECharts 高德地图组件
   var amapComponent = mapchart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
