@@ -479,11 +479,13 @@ const initMapChart = function (title, ele) {
   };
   // 使用刚指定的配置项和数据显示图表。
   let mapchart = $echarts.init(document.getElementById(ele));
+  console.log(mapchart)
   mapchart.setOption(option);
-   console.log(mapchart)
+   
   // 获取 ECharts 高德地图组件
   var amapComponent = mapchart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
+ 
   var amap = amapComponent.getAMap();
   // 添加控件
   amap.addControl(new AMap.Scale());
