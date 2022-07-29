@@ -495,7 +495,7 @@ let timer = null;
 const startRefreshChart = () => {
   timer && clearInterval(timer);
   //获取刷新周期，TODO 配置变动时，此处需自动更新
-  let refreshtime = 60 * 1000;
+  let refreshtime =10000;
   config.getConfig().forEach(function (item, index) {
     if (item.key == "refreshtime") {
       refreshtime = item.value;

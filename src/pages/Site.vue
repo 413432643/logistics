@@ -479,12 +479,11 @@ const initMapChart = function (title, ele) {
   };
   // 使用刚指定的配置项和数据显示图表。
   let mapchart = $echarts.init(document.getElementById(ele));
-  
   mapchart.setOption(option);
+   
   // 获取 ECharts 高德地图组件
   var amapComponent = mapchart.getModel().getComponent("amap");
   // 获取高德地图实例，使用高德地图自带的控件(需要在高德地图js API script标签手动引入)
- 
   var amap = amapComponent.getAMap();
   // 添加控件
   amap.addControl(new AMap.Scale());
@@ -528,7 +527,7 @@ let timer = null;
 const startRefreshChart = () => {
   timer && clearInterval(timer);
   //获取刷新周期，TODO 配置变动时，此处需自动更新
-  let refreshtime = 60 * 1000;
+  let refreshtime = 10000;
   config.getConfig().forEach(function (item, index) {
     if (item.key == "refreshtime") {
       refreshtime = item.value;
